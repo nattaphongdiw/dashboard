@@ -578,8 +578,30 @@ $("more").onclick = () => {
 };
 $("rf").onclick = () => loadAll();
 
+// ===== จำสถานะหน้า (เขตที่เลือก / ตัวกรอง / ตำแหน่งเลื่อนหน้า) =====
+const SKEY = "kr2-sec6-state";
+let savedY = 0;
+try {
+  const st = JSON.parse(sessionStorage.getItem(SKEY) || "null");
+  if (st) {
+    savedY = st.y || 0;
+    delete st.y;
+    Object.assign(F, st);
+    $("q").value = F.q;
+  }
+} catch (e) {}
+
+addEventListener("pagehide", () => {
+  try { sessionStorage.setItem(SKEY, JSON.stringify({ ...F, y: scrollY })); } catch (e) {}
+});
+
 render();
-loadAll();
+$("fs").value = F.s;
+Promise.resolve(loadAll()).then(() => {
+  $("fs").value = F.s;
+  if (savedY) scrollTo(0, savedY);
+  savedY = 0;
+});
 setInterval(loadAll, 60000);
 </script>
 </body>
