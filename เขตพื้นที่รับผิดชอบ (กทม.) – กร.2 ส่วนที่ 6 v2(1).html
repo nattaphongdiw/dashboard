@@ -518,7 +518,7 @@ const setD = d => {
   render();
 };
 const allBtn = `<button type="button" data-d="">${I.layers}ทุกเขต <span class="sm" data-c></span></button>`;
-const mapLink = `<a class="tab-link" href="${esc(MAP_GITHUB_URL)}" target="_blank" rel="noopener noreferrer">${I.map}แผนผังโรงงานรายแขวง</a>`;
+const mapLink = `<a class="tab-link" href="${esc(MAP_GITHUB_URL)}">${I.map}แผนผังโรงงานรายแขวง</a>`;
 const distBtns = TABS.map(([, l]) => `<button type="button" data-d="${l}">${I.pin}${l} <span class="sm" data-c></span></button>`).join("");
 $("tabs").innerHTML = allBtn + mapLink + distBtns;
 $("tabs").onclick = e => {
